@@ -17,7 +17,7 @@ fun App() {
                 "#ShimmeringText" -> ShimmeringTextPreview()
                 "#WPButtons" -> ButtonsPreview()
                 else -> {
-                    Text("404 Pages Not Found")
+                    Text("404 Pages ${window.location.hash} Not Found")
                 }
             }
         }
