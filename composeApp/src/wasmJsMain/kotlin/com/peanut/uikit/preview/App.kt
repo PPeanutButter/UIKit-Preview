@@ -15,6 +15,7 @@ fun App() {
         Surface(modifier = Modifier.fillMaxSize(), color = Color(0xfffefefe)) {
             when (window.location.hash) {
                 "#ShimmeringText" -> ShimmeringTextPreview()
+                "#WPButtons" -> ButtonsPreview()
                 else -> {
                     Text("404 Pages Not Found")
                 }
