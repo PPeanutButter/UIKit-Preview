@@ -2,8 +2,9 @@ name: Build Github Pages
 
 on:
     workflow_dispatch:
-    release:
-        types: [ published ]
+    push:
+        branches:
+            - main
 
 permissions:
     contents: read
@@ -31,21 +32,16 @@ jobs:
                     java-version: 17
 
             -   name: Build sample JS - Main
-                run: ./gradlew :samples:wasmApp:wasmJsBrowserDistribution
+                run: ./gradlew :composeApp:wasmJsBrowserDistribution
 
             -   name: Copy wasmApp to dist
-                run: cp -r samples/wasmApp/build/dist/wasmJs/productionExecutable deployment/
+                run: cp -r composeApp/build/dist/wasmJs/productionExecutable deployment/
 
-            -   name: Build dokka - Main
-                run: ./gradlew dokkaGeneratePublicationHtml
-
-            -   name: Copy dokka html to dist
-                run: cp -r docs/html deployment/dokka
-
-            -   name: Upload your page as github pages artifact
+            -   name: Upload page as github pages artifact
                 uses: actions/upload-pages-artifact@v3
                 with:
                     path: deployment/
+
             -   name: Deploy to GitHub Pages
                 id: deployment
                 uses: actions/deploy-pages@v4
